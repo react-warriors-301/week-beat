@@ -34,7 +34,7 @@ Usage:
 
 - Overall problem domain and how this project solves those problems:
   
-```The user has a limited amount of time and wants to get the most out their weekend. This app gives you options to fill up the time you have available, whether it be a lot or a little making you Beat the Week!. This website will be a one-stop-shop to give all the information you need like trail guides, playlists that match your adventure and restaurant recommendations etc.```
+```The user has a limited amount of time and wants to get the most out their weekend. This app gives you options to fill up the time you have available, whether it be a lot or a little making you Beat the Week!. This website will be a one-stop-shop to give all the information you need like games, video-lists that match your adventure and restaurant recommendations etc.```
 
 - summary of project:
     - A web-app to help you figure out the best way to spend your weekend outside.
