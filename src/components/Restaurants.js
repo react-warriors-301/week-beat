@@ -5,6 +5,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import Carousel from 'react-grid-carousel';
 import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+import { withAuth0 } from '@auth0/auth0-react';
+// import { FormLabel } from 'react-bootstrap';
+
+// import FavoriteBtn from './FavoriteBtn';
+import TopFive from './TopFive';
+
+
 
 class Restaurants extends Component {
 
@@ -17,6 +25,7 @@ class Restaurants extends Component {
 
             restaurantsArray: [],
             show: false
+            
         }
 
     }
@@ -56,16 +65,61 @@ class Restaurants extends Component {
     }
 
 
-    topRates = (restaurantsArray) => {
-        let answer = restaurantsArray.rating.map(result => {
-            answer.push(result);
-        })
-        console.log(answer);
 
-        return answer;
+
+    addRes = (event) => {
+        event.preventDefault();
+
+        
+        const favUrl = `http://localhost:3001/Favorites`;
+        console.log(event.target.id);
+        const name = event.target.name.alt;
+        const image =  event.target.name.src;
+        const rating = 3;
+        const price = 4;
+
+
+
+        const body = {
+            email: this.props.auth0.user.email,
+            name: name,
+            image: image,
+            rating: rating,
+            price: price,
+        }
+
+        console.log(body);
+        axios
+            .post(favUrl, body)
+            .then(result => {
+                console.log(result.data);
+                // this.setState({
+                //     restaurantsArray: result.data
+                // })
+            })
+            .catch(err => {
+                console.log(err);
+                return err;
+            });
+
+
+
+
+
     }
 
-    topRates;
+
+
+    // topRates = (restaurantsArray) => {
+    //     let answer = restaurantsArray.rating.map(result => {
+    //         answer.push(result);
+    //     })
+    //     console.log(answer);
+
+    //     return answer;
+    // }
+
+    // topRates;
 
 
 
@@ -78,30 +132,13 @@ class Restaurants extends Component {
                     <input type="submit" value="Get Restaurants !" />
                 </form>
 
-                {/* 
-                <div>
-                    <Carousel>
-                        {this.state.restaurantsArray.map(item => {
-                            return (
-                                <Carousel.Item>
-                                    <img
-                                        className="d-block w-100"
-                                        src={item.image}
-                                        alt="First slide"
-                                    />
-                                    <Carousel.Caption>
-                                                                            <h3>First slide label</h3>
-                                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                                    </Carousel.Caption>
-                                </Carousel.Item>
-
-
-                            )
-                        })}
-                    </Carousel>
-
-                </div> */}
-
+                <TopFive
+           restaurantsArray={this.state.restaurantsArray} />
+ {<br/>}
+                {<br/>}
+                {<br/>}
+                {<br/>}
+                
 
                 <div>
                     {this.state.show &&
@@ -114,12 +151,22 @@ class Restaurants extends Component {
                                         return (
 
                                             <Carousel.Item>
+
+                                                <form onSubmit={(event) => this.addRes(event)}>
+                                                
                                                 <img width="100%"
-                                                    src={item.image} alt={item.name} style={{ height: '500px' }} />
+                                                    src={item.image} alt={item.name} style={{ height: '500px' }} name="name"/>
                                                 <Card.Header>
                                                     <h3>{item.name}</h3>
                                                     <p>{item.price}</p>
+
+                                                    <Button variant="danger" id={this} type="submit" >Add fav</Button>
+                                                    {/* <FavoriteBtn/> */}
                                                 </Card.Header>
+
+                                                </form>
+
+
                                             </Carousel.Item>
 
                                         )
@@ -142,4 +189,4 @@ class Restaurants extends Component {
 
 
 
-export default Restaurants;
+export default withAuth0(Restaurants);

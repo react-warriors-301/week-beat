@@ -114,18 +114,15 @@ class Header extends React.Component {
                             <Fav />
                         </Route>
                         <Route path="/Blog">
-                        <Blog />
+                        <Blog
+                        
+                         />
                         </Route>
                         <Route path="/Main">
                         <Main />
                         </Route>
                     </Switch>
                 </Router>
-
-
-
-                <h1>hello from header!</h1>
-
             </>
         )
     }
