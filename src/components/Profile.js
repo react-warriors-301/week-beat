@@ -5,12 +5,16 @@ const Profile = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
 
   if (isLoading) {
-    return <div>Loading ...</div>;
+    return <div>
+            <img src="https://i.ibb.co/ZG3XLq2/loadergif.gif" alt="loadergif" border="0" style={{width:'20px'}}/>
+
+    </div>;
   }
 
   return (
     isAuthenticated && (
       <div>
+
         <img src={user.picture} alt={user.name} />
         <h2>{user.name}</h2>
         <p>{user.email}</p>
