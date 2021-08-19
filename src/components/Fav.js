@@ -35,7 +35,7 @@ class Fav extends React.Component {
         const { user } = this.props.auth0;
         try {
             console.log(this.props.auth0)
-            let URL = `http://localhost:3001/blog?email=${user.email}`;
+            let URL = `https://week-beat.herokuapp.com/blog?email=${user.email}`;
             console.log(URL);
             let data = await axios.get(URL);
             console.log(data);
@@ -65,7 +65,7 @@ class Fav extends React.Component {
         }
 
         axios
-            .delete(`http://localhost:3001/deletFav/${index}`, { params: Data })
+            .delete(`https://week-beat.herokuapp.com/deletFav/${index}`, { params: Data })
             .then((data) => {
                 this.setState({
                     newArr: data.data,
@@ -91,7 +91,7 @@ class Fav extends React.Component {
         }
 
         axios
-            .delete(`http://localhost:3001/deleteRes/${index}`, { params: Data })
+            .delete(`https://week-beat.herokuapp.com/deleteRes/${index}`, { params: Data })
             .then((data) => {
                 this.setState({
                     newArr2: data.data,

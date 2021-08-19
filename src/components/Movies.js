@@ -32,7 +32,7 @@ class Movies extends React.Component {
     }
     addFavoriteMov = (e) => {
         e.preventDefault();
-        const URLS = `http://localhost:3001/addmovies`
+        const URLS = `https://week-beat.herokuapp.com/addmovies`
         const title = e.target.name.alt;
         const posterPath = e.target.name.src;
         const { user } = this.props.auth0;
@@ -87,7 +87,8 @@ class Movies extends React.Component {
                 for (var i = 0; i < this.state.genresArr.length; i++) {
                     if (this.state.genresArr[i].name == needle) {
                         console.log()
-                        const apiUrl = `http://localhost:3001/movies?with_genres=${this.state.genresArr[i].id}`;
+                        //const apiUrl = `http://localhost:3001/movies?with_genres=${this.state.genresArr[i].id}`;
+                        const apiUrl=`https://week-beat.herokuapp.com/movies?with_genres=${this.state.genresArr[i].id}`
                         console.log(apiUrl);
                         axios
                             .get(apiUrl)
@@ -112,7 +113,9 @@ class Movies extends React.Component {
         let mov = []
 
         for (let x = 0; x < 5; x++) {
-            const apiUrl = `http://localhost:3001/movies?with_genres=${arr[x]}`;
+           // const apiUrl = `http://localhost:3001/movies?with_genres=${arr[x]}`;
+           const apiUrl = `https://week-beat.herokuapp.com/movies?with_genres=${arr[x]}`;
+
             console.log(apiUrl);
             axios
                 .get(apiUrl)

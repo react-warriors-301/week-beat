@@ -52,7 +52,9 @@ class Activity extends React.Component {
         }
     
         else {
-            let URL = `http://localhost:3001/activity?type=${this.state.searchQuery}&minprice=${min}&maxprice=${max}`;
+            //let URL = `http://localhost:3001/activity?type=${this.state.searchQuery}&minprice=${min}&maxprice=${max}`;
+            //https://week-beat.herokuapp.com
+            let URL = `https://week-beat.herokuapp.com/activity?type=${this.state.searchQuery}&minprice=${min}&maxprice=${max}`;
             axios
                 .get(URL)
                 .then(result => {

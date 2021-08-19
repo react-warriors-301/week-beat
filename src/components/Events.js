@@ -26,7 +26,8 @@ class Event extends React.Component {
         event.preventDefault();
         const searchQuery = event.target.name.value;
         console.log(searchQuery);
-        const url = `http://localhost:3001/events?country=${searchQuery}`;
+        //const url = `http://localhost:3001/events?country=${searchQuery}`;
+        const url=`https://week-beat.herokuapp.com/events?country=${searchQuery}`
         axios
             .get(url)
             .then(result => {
