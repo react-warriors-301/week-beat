@@ -7,6 +7,11 @@ import Carousel from 'react-grid-carousel'
 import Image from 'react-bootstrap/Image'
 import Button from 'react-bootstrap/Button'
 import { withAuth0 } from '@auth0/auth0-react';
+import Header from './Header';
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import '../CSS/movies.css'
+import AddedModal from './AddedModal';
 //import Carousel from 'react-bootstrap/Carousel'
 class Movies extends React.Component {
     // const {isAthenticated}  
@@ -21,6 +26,8 @@ class Movies extends React.Component {
             postArr: [],
             showSlider: false,
             Arr: [],
+            loaded:false,
+            show:false,
         }
     }
     addFavoriteMov = (e) => {
@@ -29,19 +36,30 @@ class Movies extends React.Component {
         const title = e.target.name.alt;
         const posterPath = e.target.name.src;
         const { user } = this.props.auth0;
-        // console.log('hello from button function ');
-        const movieData = {
-            email: user.email,
-            title: title,
-            posterPath: posterPath,
-        }
+        const releaseData=e.target.releaseData;
+        const popularity= e.target.popularity;
+        const voteAverage= e.target.voteAverage;
+       const  vote_count=e.target.vote_count;
+        const overView =e.target.overView;
+            // console.log('hello from button function ');
+            const movieData = {
+                email: user.email,
+                title: title,
+                posterPath: posterPath,
+                releaseData:releaseData,
+                popularity:popularity,
+                voteAverage:voteAverage,
+                vote_count:vote_count,
+                overView:overView,
+            }
         console.log('I am movies Data!', movieData);
         axios
             .post(URLS, movieData)
             .then(element => {
                 try {
                     this.setState({
-                        postArr: element.data
+                        postArr: element.data,
+                        show:true
                     })
                 } catch (error) {
                     <>
@@ -62,7 +80,8 @@ class Movies extends React.Component {
             .get(URL)
             .then(results => {
                 this.setState({
-                    genresArr: results.data.genres
+                    genresArr: results.data.genres,
+                    loaded:true
                 })
                 const needle = this.state.searchQuery;
                 for (var i = 0; i < this.state.genresArr.length; i++) {
@@ -122,96 +141,147 @@ class Movies extends React.Component {
 
 
     }
+    handleClose = () => {
+      this.setState({
+          show: false
+      })
+  }
 
-    render() {  
-       //const fArr =[];
+    render() {
+      { if(this.state.loaded===false){
+        <center>
 
-              //{fArr.push(this.state.Arr)}
+<img src="https://i.ibb.co/mtxXsdB/gif-animations-replace-loading-unscreen.gif" alt="loadergif" border="0" style={{ width: '300px' }} />
+   </center>}
+   }
+      const { user, isAuthenticated, isLoading } = this.props.auth0;
 
+      if (isLoading) {
+        return <div>
+            <center>
+            
+                <img src="https://i.ibb.co/mtxXsdB/gif-animations-replace-loading-unscreen.gif" alt="loadergif" border="0" style={{ width: '300px' }} />
+            </center>
+        </div>;
+    }
+
+        //const fArr =[];
+        //{fArr.push(this.state.Arr)}
         const types = [
-            { value: 'Action', label: 'Action' },
-            { value: 'Adventure', label: 'Adventure' },
-            { value: 'Animation', label: 'Animation' },
-            { value: 'Comedy', label: 'Comedy' },
-            { value: 'Crime', label: 'Crime' },
-            { value: 'Drama', label: 'Drama' },
-            { value: 'Family', label: 'Family' },
-            { value: 'Fantasy', label: 'Fantasy' },
-            { value: 'Horror', label: 'Horror' },
-            { value: 'Music', label: 'Music' },
-            { value: 'Mystery', label: 'Mystery' },
-            { value: 'Romance', label: 'Romance' },
-            { value: 'Science Fiction', label: 'Science Fiction' },
-        ]
+            { value: "Action", label: "Action" },
+            { value: "Adventure", label: "Adventure" },
+            { value: "Animation", label: "Animation" },
+            { value: "Comedy", label: "Comedy" },
+            { value: "Crime", label: "Crime" },
+            { value: "Drama", label: "Drama" },
+            { value: "Family", label: "Family" },
+            { value: "Fantasy", label: "Fantasy" },
+            { value: "Horror", label: "Horror" },
+            { value: "Music", label: "Music" },
+            { value: "Mystery", label: "Mystery" },
+            { value: "Romance", label: "Romance" },
+            { value: "Science Fiction", label: "Science Fiction" },
+        ];
         return (
             <>
-                <p>Hello from movies</p>
-                {console.log(this.state.Arr)}
-
-                <Select options={types} onChange={this.change} />
-
-                {this.state.showSlider &&
-
-                    <center>
-                        <Card >
-                            <Carousel cols={3} rows={1} gap={10} loop >
-                                {this.state.moviesArr.map(item => {
-                                    return (
-                                        <Carousel.Item >
-                                            <Card.Header name='name'>
-                                                {item.title}
-                                            </Card.Header>
-                                            <form onSubmit={this.addFavoriteMov}>
-                                                <img
-                                                    name='name'
-                                                    className="d-block w-100"
-                                                    src={item.posterPath !== null ? 'https://image.tmdb.org/t/p/original/' + (item.posterPath).split('/')[1] : 'https://sd.keepcalms.com/i-w600/keep-calm-poster-not-found.jpg'}
-                                                    alt={item.title}
-                                                    style={{ height: '500px' }}
-                                                />
-                                                <Button variant="outline-secondary" id="button-addon2" type='submit'>Warning</Button>
-
-                                            </form>
-                                        </Carousel.Item>
-                                    )
-                                })}
-                            </Carousel>
-                        </Card>
-                    </center>
-                } 
-                {<br/>}
-                {<br/>}
-                
-                { 
+            <Header/>
             <center>
-                        <Card style={{ width: '60rem' }}>
-                            <Carousel cols={1} rows={1} gap={10} loop >
-                                {this.state.Arr.map(item => {
-                                    return (
-                                        <Carousel.Item >
-                                            <Card.Header name='name'>
-                                                {item.title}
-                                            </Card.Header>
-                                            <form onSubmit={this.addFavoriteMov}>
-                                                <img
-                                                    name='name'
-                                                    className="d-block w-100"
-                                                    alt={item.title}
-                                                    src={item.posterPath !== null ? 'https://image.tmdb.org/t/p/original/' + (item.posterPath).split('/')[1] : 'https://sd.keepcalms.com/i-w600/keep-calm-poster-not-found.jpg'}
+            <Select
+              options={types}
+              onChange={this.change}
+              className="selectMovies"
+            />
+            </center>
+            <div>
+              <Card className="recommend">
+                <Card.Img variant="top" src="" className="Movie" />
+                <Card.Body>
+                  <Card.Text className="khair2">
+                    Most Recommended Movies
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+              <br />
+              <br />
+            </div>
+            {
+              <center>
+              
+                <Card style={{ width: "60rem" }} className="cards">
+                  <Carousel cols={1} rows={1} gap={10} loop>
+                    {this.state.Arr.map((item) => {
+                      return (
+                        <Carousel.Item>
+                          <Card.Header name="name" style={{color:'white'}}>{item.title}</Card.Header>
+                          <form onSubmit={this.addFavoriteMov}>
+                            <img
+                              name="name"
+                              className="d-block w-100"
+                              alt={item.title}
+                              src={
+                                item.posterPath !== null
+                                  ? "https://image.tmdb.org/t/p/original/" +
+                                    item.posterPath.split("/")[1]
+                                  : "https://sd.keepcalms.com/i-w600/keep-calm-poster-not-found.jpg"
+                              }
+                              style={{ height: "65em" }}
+                            />
+                          </form>
+                        </Carousel.Item>
+                      );
+                    })}
+                  </Carousel>
+                </Card>
+              </center>
+            }
+            {console.log(this.state.Arr)}
+           
+            {<br></br>}
+            {this.state.showSlider &&
 
-                                                    style={{ height: '40em' }}
-                                                />
+<center>
+    <Card >
+        <Carousel cols={3} rows={1} gap={10} loop >
+            {this.state.moviesArr.map(item => {
+                return (
+                    <Carousel.Item >
+                        <Card.Header name='name'>
+                            {item.title}
+                        </Card.Header>
+                        <form onSubmit={this.addFavoriteMov}>
+                            <img
+                                name='name'
+                                className="d-block w-100"
+                                src={item.posterPath !== null ? 'https://image.tmdb.org/t/p/original/' + (item.posterPath).split('/')[1] : 'https://sd.keepcalms.com/i-w600/keep-calm-poster-not-found.jpg'}
+                                alt={item.title}
+                                style={{ height: '500px' }}
+                            />
 
-                                            </form>
-                                        </Carousel.Item>
-                                    )
-                                })}
-                            </Carousel>
-                        </Card>
-                    </center>
-         }
-            </>
-        )
+                         
+                            <div maxlength="137" className="card-text" style={{color:'white'}}> {item.overView} </div>
+                            <small id="popularity" class="text-muted">Popularity :{item.popularity}</small><br/>
+                            <small class="text-muted">Vote Average :{item.voteAverage}</small><br/>
+                            <small class="text-muted">Vote Count :{item.vote_count}</small><br/>
+                            <small class="text-muted">Release Data:{item.releaseData}</small><br/>
+
+
+                            <Button variant="danger" id="button-addon2" type='submit'>🤍</Button>
+
+                        </form>
+                    </Carousel.Item>
+                    
+                )
+            })}
+        </Carousel>
+    </Card>
+</center>
+} 
+<AddedModal
+                        show={this.state.show}
+                        hide={this.handleClose}
+                    />
+          </>
+        );
+      }
     }
-}
-export default withAuth0(Movies);
+    export default withAuth0(Movies);

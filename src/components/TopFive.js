@@ -17,12 +17,28 @@ class TopFive extends Component {
         return answer;
     }
 
-
+    
 
     render() {
         return (
 
                 <center>
+                  <div>
+                            <Card className="recommend">
+                                <Card.Img variant="top" src="" className="Movie" />
+                                <Card.Body>
+                                    <Card.Text>
+                                    <center>
+
+                                       <h3> Most Recommended Restaurants</h3>
+                                        </center>
+                                    </Card.Text>
+                                </Card.Body>
+                            </Card>
+                            <br />
+                            <br />
+                        </div>
+
                         <Card style={{ width: '60rem' }}>
                     <Carousel >
                         {this.topRates(this.props.restaurantsArray).map((item) => {
@@ -34,10 +50,11 @@ class TopFive extends Component {
                                         alt={item.name}
                                         style={{ height: '40em' }}
 
+
                                     />
                                     <Carousel.Caption>
-                                        <h3>{item.name}</h3>
-                                        <p>Rating : {item.rating}</p>
+                                        <b><h3 style={{color:'white'}}>{item.name}</h3></b>
+                                        <p style={{color:'white'}}>Rating : {item.rating}</p>
                                     </Carousel.Caption>
                                 </Carousel.Item>
                             );

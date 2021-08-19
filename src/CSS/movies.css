@@ -1,0 +1,33 @@
+body{
+    background-color:#EDEDDF ;
+    font-weight: bolder;
+}
+.Button1{
+   background-color: #FEA53A ;
+}
+.cards{
+    background-color: #499CA2 ;
+}
+.selectMovies{
+    border-color: #FEA53A ;
+    width: 70%;
+    margin-top: 20px;
+}
+.recommend{
+    background-image: url('https://images-ext-1.discordapp.net/external/aY8yPVEpSUA8zjm9iYS1qlp_YrdoJpJ9T9qDTyV7k3A/%3Fq%3Dtbn%3AANd9GcRQjKrMk2a9T8981sd56k88aacT2faAl0syLA%26usqp%3DCAU/https/encrypted-tbn0.gstatic.com/images');
+    width: 100%;
+    margin-top: 20px;
+
+}
+.Movie{
+    width: 10%;
+}
+.khair2{
+    position: relative;
+    background-color:#EDEDDF ;
+    width:20%;
+    text-align: center;
+    left: 40%;
+    font-size: 20px;
+    height: 50%
+}
