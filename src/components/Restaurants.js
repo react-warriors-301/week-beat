@@ -122,7 +122,8 @@ class Restaurants extends Component {
                             </Form>
                         </section>
                         <section className="sextion2">
-                            <img src="http://i.hmp.me/m/4d905830a0874cd5dd2b88801f96ce07.png" alt="resturants" />
+                        
+                            <img src="https://i.ibb.co/QPCwt7S/4d905830a0874cd5dd2b88801f96ce07.png" alt="resturants" />
                         </section>
                     </div>
                     {<br />}
