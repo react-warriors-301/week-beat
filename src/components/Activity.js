@@ -115,7 +115,7 @@ if (isLoading) {
                         </form>
                     </section>
                     <section className="section1">
-                        <img src="https://hmp.me/do1k" alt='activity' className="img"></img>
+                        <img src="http://i.hmp.me/m/c0c954fee5ee25284fae11381e3ed3dc.png" alt='activity' className="img"></img>
                     </section>
                     <center>
                     {this.state.showCard &&
