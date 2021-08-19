@@ -157,7 +157,6 @@ class Restaurants extends Component {
                                                                 <h5>{item.name}</h5>
                                                                 <p>{item.price}</p>
                                                                 <Button variant="danger" type="submit" >🤍</Button>
-                                                                {/* <FavoriteBtn/> */}
                                                             </Card.Header>
                                                         </form>
                                                     </Carousel.Item>

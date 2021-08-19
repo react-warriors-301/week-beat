@@ -109,7 +109,7 @@ if (isLoading) {
                                 <FormControl placeholder="Min Budget" name='min' />
                                 <FormControl placeholder="Max Budget" name='max' />
                                 <Button variant="warning" id="button-addon2" type='submit' className="btn2">
-                                    Button
+                                    SHOW!
                                 </Button>
                             </InputGroup>
                         </form>

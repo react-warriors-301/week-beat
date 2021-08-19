@@ -301,7 +301,14 @@ class Blog extends React.Component {
                                 {e.blogText}
 
                             </Card.Text>
-                            <Card.Footer>
+                           
+
+
+                        </Card.Body>
+                     
+                    </Card> 
+                    
+                       <Card.Footer>
                                 <Button variant="danger" onClick={() => {
                                     this.deleteBlog(idx);
                                 }}>X</Button>
@@ -309,10 +316,6 @@ class Blog extends React.Component {
                                 <Button variant="warning" value={idx} onClick={this.selectUpdateBlog} className="in">🔧</Button>
 
                             </Card.Footer>
-
-
-                        </Card.Body>
-                    </Card>
                 </div>
             )
 
