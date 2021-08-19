@@ -93,9 +93,9 @@ class Home extends React.Component {
                                                                        <h5> {e.title}</h5>
                                                                     </Card.Header>
                                                                     <Card.Body className="card-body">
-                                                                        <Card.Text>
+                                                                        <b><Card.Text style={{'margin-top':'40px',fontSize:'12px'}}>
                                                                             {e.blogText}
-                                                                        </Card.Text>
+                                                                        </Card.Text></b>
                                                                     </Card.Body>
                                                                     </Card>
                                                                 </Carousel.Item>
