@@ -1,0 +1,22 @@
+.pagebackground{
+    background-color: #EDEDDF ;
+}
+.section1{
+    display: inline-block;
+}
+.section2{
+    float:right;
+}
+.img{
+    width: 70%;
+    height: 70%;
+    position: relative;
+    left:180px;
+    margin-top: 30px;
+}
+.btn2{
+    background-color: #FEA53A ;
+}
+.label{
+    background-color: #499CA2;
+}

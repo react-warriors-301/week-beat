@@ -1,0 +1,37 @@
+.topfive{
+    margin: 100px;
+}
+.sextion1{
+display: inline-block;
+}
+.sextion2{
+    float:right;
+}
+.addBtn{
+    background-color: #FEA53A ;
+}
+.form{
+    padding: 160px 50px 20px;
+}
+.pagebackground{
+    background-color: #EDEDDF ;
+}
+.card{
+    border : none;
+    background-color: #EDEDDF;
+}
+.h1{ 
+    margin: 40px;
+}
+.button{
+    background-color: #FEA53A ;
+}
+.smallcards{
+    background-color:white;
+margin: 10px;
+}
+
+
+
+
+

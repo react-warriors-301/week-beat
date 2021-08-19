@@ -9,6 +9,9 @@ import Card from 'react-bootstrap/Card'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
+import Header from './Header';
+import CardGroup from 'react-bootstrap/CardGroup'
+
 class Fav extends React.Component {
     constructor(props) {
         super(props);
@@ -124,68 +127,74 @@ class Fav extends React.Component {
         }
         return (
             <>
-                <h1>Your Favorite Movies</h1>
-                {
-                    this.state.newData[0] !== undefined ?
+            <Header/>
+
+              
+
+                    {this.state.newData[0] !== undefined ?
 
 
-                    this.state.showcard2 &&
-                    this.state.newData[0].movies.map((e, idx) => {
+                    this.state.showcard2 &&  
+                    <>
+                    <Card.Text className="khair2" style={{'margin':'20px'}}>
+                Your Favorite Movies
+                  </Card.Text>
+                                              <CardGroup>
+
+                    {this.state.newData[0].movies.map((e, idx) => {
 
                         return (
-                            <Card style={{ width: '18rem' }}>
-                                <Card.Img variant="top" style={{ width: '5em' }} src={e.posterPath} />
+                            <CardGroup>
+
+                            <Card style={{ width: '29em' ,height:'20em','margin-right':'15px','margin-left':'5px' }}>
+                            <center>
+                                <Card.Img variant="top" style={{ width: '15em',height:'10em' }} src={e.posterPath} />
+                                
                                 <Card.Body>
-                                    <Card.Title>{e.title}</Card.Title>
+                                    <Card.Title style={{color:'white'}}>{e.title}</Card.Title>
 
                                     <Button variant="danger" onClick={() => {
                                         this.deleteMovie(idx);
                                         this.getMovies();
-                                    }}>X</Button>                            </Card.Body>
+                                    }}>X</Button>  
+                                    
+                                    </Card.Body> 
+                              </center>      
+
                             </Card>
+                            </CardGroup>
+
+
                         )
 
-                    })
+                    })}
+                            </CardGroup>
+                            </>
                     : null
                 }
 
-                {
-                    this.state.newArr[0] !== undefined ?
-
-
-                    this.state.showCard4 &&
-                    this.state.newArr[0].movies.map((e, idx) => {
-
-                        return (
-                            <Card style={{ width: '18rem' }}>
-                                <Card.Img variant="top" style={{ width: '5em' }} src={e.posterPath} />
-                                <Card.Body>
-                                    <Card.Title>{e.title}</Card.Title>
-
-                                    <Button variant="danger" onClick={() => {
-                                        this.deleteMovie(idx);
-                                        this.getMovies();
-                                    }}>X</Button>                            </Card.Body>
-                            </Card>
-                        )
-
-                    })
-                    : null
-                }
-                <h1>Your Favorite Restaurants</h1>
-
+            
+                
                 {
                     this.state.newData[0] !== undefined ?
 
                     this.state.newData &&
                     this.state.showcard2 &&
-                    this.state.newData[0].res.map((e,idx) => {
+                    <>
+                    <Card.Text className="khair2" style={{'margin':'20px'}}>
+                Your Favorite Restaurants
+                  </Card.Text>
+                    <CardGroup>
+                    {this.state.newData[0].res.map((e,idx) => {
 
                         return (
-                            <Card style={{ width: '18rem' }}>
-                                <Card.Img variant="top" style={{ width: '5em' }} src={e.image} />
+                            <CardGroup>
+                            <Card style={{ width: '29em' ,height:'20em','margin-right':'15px','margin-left':'5px' }}>
+                            <center>
+                                <Card.Img variant="top" style={{ width: '15em'}} src={e.image} />
+                                </center>
                                 <Card.Body>
-                                    <Card.Title>{e.name}</Card.Title>
+                                    <Card.Title style={{color:'white'}}>{e.name}</Card.Title>
 
                                     <Button variant="danger" onClick={() => {
                                         this.deleteRes(idx);
@@ -193,35 +202,17 @@ class Fav extends React.Component {
 
                                     }}>X</Button>                                </Card.Body>
                             </Card>
+                            </CardGroup>
                         )
 
-                    })
+                    })}
+                    </CardGroup>
+                    </>
                     :null
+                    
                 }
 
-                {
-                    this.state.newArr2[0] !== undefined ?
-
-
-                    this.state.showCard3 &&
-                    this.state.newArr2[0].movies.map((e, idx) => {
-
-                        return (
-                            <Card style={{ width: '18rem' }}>
-                                <Card.Img variant="top" style={{ width: '5em' }} src={e.posterPath} />
-                                <Card.Body>
-                                    <Card.Title>{e.title}</Card.Title>
-
-                                    <Button variant="danger" onClick={() => {
-                                        this.deleteMovie(idx);
-                                        this.getMovies();
-                                    }}>X</Button>                            </Card.Body>
-                            </Card>
-                        )
-
-                    })
-                    : null
-                }
+    
             </>
         )
     }

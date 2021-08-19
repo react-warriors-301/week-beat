@@ -10,7 +10,11 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 import UpdateForm from './UpdateForm';
-
+import Header from './Header';
+import CardGroup from 'react-bootstrap/CardGroup'
+import CardColumns from 'react-bootstrap/CardColumns'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 class Blog extends React.Component {
     constructor(props) {
         super(props);
@@ -52,9 +56,10 @@ class Blog extends React.Component {
         const updatedData = {
             title: Title || this.state.blogArray.title,
             desc: desc || this.state.blogArray.desc,
-            email: user.email
-        };
+            email: user.email,
 
+        };
+        console.log(this.props.auth0)
         console.log('updated data are:.....')
         console.log(updatedData);
         axios
@@ -135,7 +140,11 @@ class Blog extends React.Component {
         const blogData = {
             title: Title,
             desc: desc,
-            email: user.email
+            email: user.email,
+            name: user.name,
+            image: user.picture
+
+
         }
 
         axios
@@ -206,103 +215,110 @@ class Blog extends React.Component {
         return (
 
             <>
-
-
+                <Header />
                 <center>
+                    <CardGroup>
 
-                    <Card style={{ width: '25rem' }} onClick={this.getBlogs}>
-                        <Card.Body>
-                            <Card.Title style={{ 'color': 'black' }}> See your Blogs!</Card.Title>
-                            <Card.Img variant="top" src='https://www.crissh2020.eu/wp-content/uploads/2018/02/blog-criss.png' />
-                        </Card.Body>
-                    </Card>
+                        <Card style={{ width: '25em' }} onClick={this.getBlogs}>
+                            <Card.Body>
+                                <Card.Title style={{ 'color': 'black' }}>See your Blogs!</Card.Title>
+                                <Card.Img variant="top" src='https://www.crissh2020.eu/wp-content/uploads/2018/02/blog-criss.png' />
+                            </Card.Body>
+                        </Card>
 
-                    <Card style={{ width: '25rem' }} onClick={(event) => { this.showForm(event); this.getBlogs(); }}>
-                        <Card.Body>
-                            <Card.Title style={{ 'color': 'black' }}> Add your Own Blog!</Card.Title>
-                            <Card.Img variant="top" src='https://sarahswritestuff.com/wp-content/uploads/2019/03/Article-Writing-Blogs.jpg' />
-                        </Card.Body>
-                    </Card>
+                        <Card style={{ width: '25em' }} onClick={(event) => { this.showForm(event); this.getBlogs(); }}>
+                            <Card.Body>
+                                <Card.Title style={{ 'color': 'black' }}>Add your Own Blog!</Card.Title>
+                                <Card.Img variant="top" src='https://sarahswritestuff.com/wp-content/uploads/2019/03/Article-Writing-Blogs.jpg' />
+                            </Card.Body>
+                        </Card>
+                    </CardGroup>
 
                 </center>
                 {
 
 
-                        this.state.newData[0] !== undefined ?
+                    this.state.newData[0] !== undefined ?
                         this.state.showNewCard &&
+                        <CardGroup>
 
+                                {
                         this.state.newData[0].blog.map((e, idx) => {
-                            { console.log(this.state.newData[0]) }
-                            const { user } = this.props.auth0;
+                                    { console.log(this.state.newData[0]) }
+                                    const { user } = this.props.auth0;
 
-                            return (
-                                <div key={idx}>
+                                    return (
 
-                                    <Card style={{ width: '18rem' }}>
-                                        <Card.Img variant="top" style={{ width: '2em', 'borderRadius': '50px' }} src={user.picture} />
-                                        <Card.Body>
-                                            <Card.Title>{e.title}</Card.Title>
-                                            <Card.Text>
-                                                {e.blogText}
+                                        <div key={idx}>
 
-                                            </Card.Text>
+                                            <Card style={{ width: '28rem'  ,height:'32em','margin-right':'25px','margin-left':'30px'}}>
+                                                <Card.Img variant="top" src={user.picture} style={{ width: '5em', 'borderRadius': '50px' }} />
+                                                <Card.Body>
+                                                   <h3> <Card.Header>{e.title}</Card.Header></h3>
+                                                    <Card.Text>
+                                                        <p>{e.blogText}</p>
+                                                    </Card.Text>
 
 
-                                        </Card.Body>
-                                    </Card>
-                                            <Card.Footer>
-                                                <Button variant="danger" onClick={() => {
-                                                    this.deleteBlog(idx);
-                                                }}>X</Button>
+                                                </Card.Body>
+                                                <Card.Footer>
+                                                    <Button style={{'margin-right':'15px','width':'60px'}}variant="danger" onClick={() => {
+                                                        this.deleteBlog(idx);
+                                                    }}>X</Button>
 
-                                                <Button variant="warning" value={idx} onClick={this.selectUpdateBlog} className="in">🔧</Button>
+                                                    <Button style={{'width':'60px'}}variant="warning" value={idx} onClick={this.selectUpdateBlog} className="in">🔧</Button>
 
-                                            </Card.Footer>
-                                </div>
-                            )
+                                                </Card.Footer>
+                                            </Card>
 
-                        })
+                                            </div>
+
+                                            )
+
+                                })
+                                }
+                                </CardGroup>
                         : null
-                }
+    }
                 {
 
 
-                        this.state.blogArray[0] !== undefined ?
-                        this.state.showcard2 &&
+    this.state.blogArray[0] !== undefined ?
+        this.state.showcard2 &&
 
-                        this.state.blogArray[0].blog.map((e, idx) => {
-                            { console.log(this.state.blogArray[0]) }
-                            const { user } = this.props.auth0;
+        this.state.blogArray[0].blog.map((e, idx) => {
+            { console.log(this.state.blogArray[0]) }
+            const { user } = this.props.auth0;
 
-                            return (
-                                <div key={idx}>
+            return (
+                <div key={idx}>
 
-                                    <Card style={{ width: '18rem' }}>
-                                        <Card.Img variant="top" style={{ width: '2em', 'borderRadius': '50px' }} src={user.picture} />
-                                        <Card.Body>
-                                            <Card.Title>{e.title}</Card.Title>
-                                            <Card.Text>
-                                                {e.blogText}
+                    <Card style={{ width: '18rem' }}>
+                        <Card.Img variant="top" style={{ width: '2em', 'borderRadius': '50px' }} src={user.picture} />
+                        <Card.Body>
+                            <Card.Title>{e.title}</Card.Title>
+                            <Card.Text>
+                                {e.blogText}
 
-                                            </Card.Text>
-                                            <Card.Footer>
-                                                <Button variant="danger" onClick={() => {
-                                                    this.deleteBlog(idx);
-                                                }}>X</Button>
+                            </Card.Text>
+                            <Card.Footer>
+                                <Button variant="danger" onClick={() => {
+                                    this.deleteBlog(idx);
+                                }}>X</Button>
 
-                                                <Button variant="warning" value={idx} onClick={this.selectUpdateBlog} className="in">🔧</Button>
+                                <Button variant="warning" value={idx} onClick={this.selectUpdateBlog} className="in">🔧</Button>
 
-                                            </Card.Footer>
+                            </Card.Footer>
 
 
-                                        </Card.Body>
-                                    </Card>
-                                </div>
-                            )
+                        </Card.Body>
+                    </Card>
+                </div>
+            )
 
-                        })
-                        : null
-                }
+        })
+        : null
+}
 
 
 
@@ -311,15 +327,22 @@ class Blog extends React.Component {
                     backdrop="static"
                     keyboard={false}
                 >
-                    <form onSubmit={this.addBlogs}>
-                        <Form.Control type="text" placeholder="Add a Title" name='blog' />
+                    <Modal.Header>
+                        <h3> Adding Blogs Form 😄😎 </h3>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <form onSubmit={this.addBlogs}>
+                            <Form.Control type="text" placeholder="Add a Title" name='blog' />
 
-                        <Form.Control type="text" as="textarea" rows={5} placeholder="what do you think about? ..." name='desc' />
-
-                        <Button variant="info" type="submit" onClick={() => { this.handleClose(); this.getBlogs(); }}>
-                            Submit
+                            <Form.Control type="text" as="textarea" rows={5} placeholder="what do you think about? ..." name='desc' />
+                            <Button variant="info" type="submit" onClick={() => { this.handleClose(); this.getBlogs(); }} style={{ width: '70px' }}>
+                                Submit
+                            </Button>
+                        </form>
+                        <Button variant="danger" type="submit" onClick={() => { this.handleClose(); }} style={{ width: '70px' }}>
+                            Close
                         </Button>
-                    </form>
+                    </Modal.Body>
                 </Modal>
 
                 <UpdateForm show={this.state.showUpForm} close={this.closeUpForm} update={this.updateBlog} />

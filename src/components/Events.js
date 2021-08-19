@@ -7,13 +7,17 @@ import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card'
 import Carousel from 'react-grid-carousel'
 import Image from 'react-bootstrap/Image'
+import Header from './Header';
+import '../CSS/event.css'
+import { withAuth0 } from '@auth0/auth0-react';
 
 class Event extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             eventArray: [],
-            showSlider:false
+            showSlider:false,
+            loaded:false
 
         }
     }
@@ -28,7 +32,8 @@ class Event extends React.Component {
             .then(result => {
                 this.setState({
                     eventArray: result.data,
-                    showSlider:true
+                    showSlider:true,
+                    loaded:true
 
                 })
 
@@ -38,33 +43,59 @@ class Event extends React.Component {
                 console.log(err);
             })
     }
-    render() {
-
-        return (
+    render() {  
+        
+        
+        const { isLoading } = this.props.auth0;
+     if (isLoading) {
+          return <div>
+              <center>
+              
+                  <img src="https://i.ibb.co/mzh0nZK/681dd2c6e0f1b52a9a5dc7c995b14e-unscreen.gif" alt="loadergif" border="0" style={{ width: '300px' }} />
+              </center>
+          </div>;
+      }
+      /*   { if(this.state.loaded===true){
+            this.state.loaded=false;
+ return <center>
+<img src="https://i.ibb.co/mzh0nZK/681dd2c6e0f1b52a9a5dc7c995b14e-unscreen.gif" alt="loadergif" border="0" style={{ width: '300px' }} />
+       </center>}
+      
+       } */
+   
+       return (
             <>
+                        <Header/>
+
+            <br/>
+            <center>
+            <h4>Enter your location to show you the most </h4>
+            <h6>           Entertaining events around you:</h6>
+            </center>
+                
+            <br/>
                 <form onSubmit={this.getEvents}>
-                    <InputGroup className="mb-3">
+                    <InputGroup className="locationEvent">
                         <FormControl
-                            placeholder="Recipient's username"
-                            aria-label="Recipient's username"
+                            placeholder="Enter your location"
+                            aria-label="Enter your location"
                             aria-describedby="basic-addon2"
                             name='name'
                         />
-                        <Button variant="outline-secondary" id="button-addon2" type='submit'>
+                        <Button variant="outline-secondary" id="button-addon2" type='submit' className="button2">
                             Button
                         </Button>
                     </InputGroup>
+                    <br/>
                 </form>
                 {this.state.showSlider &&
                 <center>
-                    <Card>
-                    
+                    <Card className="eventsCards">
                     <Carousel cols={3} rows={1} gap={10} loop >
-
                         {this.state.eventArray.map(item => {
                             return (
                                 <Carousel.Item>
-                                <Card.Header>
+                                <Card.Header style={{color:'white'}}>
                                     {item.title}
                                 </Card.Header>
                                 <Card.Text>
@@ -73,10 +104,9 @@ class Event extends React.Component {
                                    <h5>on {item.date.when}</h5>
                                 </Card.Text>
                                 <a href={item.link}>
-
-                                    <Image width="80%" src={item.thumbnail} />
+                                    <Image width="80%"  height='60%' src={item.thumbnail} />
                                     </a>
-                                <Card.Footer>
+                                <Card.Footer style={{color:'white'}}>
                                         <h6>{item.address[1]}</h6>
                                         {item.address[0]}
                                     </Card.Footer>
@@ -86,12 +116,9 @@ class Event extends React.Component {
                     </Carousel>
                   </Card>
                   </center>
-  
   }
-
             </>
         )
     }
 }
-
-export default Event;
+export default withAuth0(Event);
