@@ -315,7 +315,7 @@ class Blog extends React.Component {
 
                                 <Button variant="warning" value={idx} onClick={this.selectUpdateBlog} className="in">🔧</Button>
 
-                            </Card.Footer>
+                        </Card.Footer>
                 </div>
             )
 

@@ -191,7 +191,7 @@ class Fav extends React.Component {
                             <CardGroup>
                             <Card style={{ width: '29em' ,height:'20em','margin-right':'15px','margin-left':'5px' }}>
                             <center>
-                                <Card.Img variant="top" style={{ width: '15em'}} src={e.image} />
+                                <Card.Img variant="top" style={{ width: '15em',height:'10em'}} src={e.image} />
                                 </center>
                                 <Card.Body>
                                     <Card.Title style={{color:'white'}}>{e.name}</Card.Title>
