@@ -63,7 +63,7 @@ class Blog extends React.Component {
         console.log('updated data are:.....')
         console.log(updatedData);
         axios
-            .put(`http://localhost:3001/update/${index}`, updatedData)
+            .put(`https://week-beat.herokuapp.com/update/${index}`, updatedData)
             .then((data) => {
                 this.setState({
                     newData: data.data
@@ -91,7 +91,7 @@ class Blog extends React.Component {
         const { isLoading, user, isAuthenticated } = this.props.auth0;
         try {
             console.log(this.props.auth0)
-            let URL = `http://localhost:3001/blog?email=${user.email}`;
+            let URL = `https://week-beat.herokuapp.com/blog?email=${user.email}`;
             console.log(URL);
             let data = await axios.get(URL);
             this.setState({
@@ -130,7 +130,7 @@ class Blog extends React.Component {
     addBlogs = async (event) => {
 
         event.preventDefault();
-        const URL = `http://localhost:3001/add_blog`
+        const URL = `https://week-beat.herokuapp.com/add_blog`
 
         const Title = event.target.blog.value;
         const desc = event.target.desc.value;
@@ -181,7 +181,7 @@ class Blog extends React.Component {
         }
 
         axios
-            .delete(`http://localhost:3001/deleteBlog/${index}`, { params: Data })
+            .delete(`https://week-beat.herokuapp.com/deleteBlog/${index}`, { params: Data })
             .then((data) => {
                 this.setState({
                     newData: data.data,

@@ -24,7 +24,7 @@ class Home extends React.Component {
     }
     getBlogs = async () => {
         try {
-            let URL = `http://localhost:3001/all`;
+            let URL = `https://week-beat.herokuapp.com/all`;
             console.log(URL);
             let data = await axios.get(URL);
 

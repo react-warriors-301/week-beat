@@ -26,7 +26,8 @@ class Restaurants extends Component {
         let searchQuery = event.target.location.value;
         // const URL = `${this.state.server}/restaurants?location=${searchQuery}` 
         // http://localhost:3001/restaurants?location=Houston
-        const URL = `http://localhost:3001/restaurants?location=${searchQuery}`
+        //const URL = `http://localhost:3001/restaurants?location=${searchQuery}`
+        const URL=`https://week-beat.herokuapp.com/restaurants?location=${searchQuery}`
         axios
             .get(URL)
             .then(results => {
@@ -43,7 +44,7 @@ class Restaurants extends Component {
     }
     addRes = (event) => {
         event.preventDefault();
-        const favUrl = `http://localhost:3001/Favorites`;
+        const favUrl = `https://week-beat.herokuapp.com/Favorites`;
         console.log(event.target.id);
         const name = event.target.name.alt;
         const image = event.target.name.src;
